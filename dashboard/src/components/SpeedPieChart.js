@@ -33,7 +33,7 @@ class SpeedPieChart extends Component {
     }
     if(data > 60){
       let temp = this.state.rangeC;
-      this.setState({rangeA: temp + 1})
+      this.setState({rangeC: temp + 1})
     }
     this.rangify();
   }
@@ -45,9 +45,10 @@ class SpeedPieChart extends Component {
     let total = a + b + c;
     let dataA = (a / total).toFixed(2);
     let dataB = (b / total).toFixed(2);
-    let dataC = 100 - dataA - dataB;
+    let dataC = (parseFloat(Math.ceil((1 - dataA - dataB) * 100)) / 100).toFixed(2);
     let chart = this.spc.getChart();
-    chart.series[0].setData({y: dataA}, {y: dataB}, {y: dataC});
+    console.log(dataA * 100, dataB * 100, Math.ceil(dataC * 100))
+    chart.series[0].setData([['0 to 30mph', dataA * 100], ['30 to 60mph', dataB * 100], ['> 60mph', Math.floor(dataC * 100)]], true);
   }
 
   createConfig = () => {
@@ -62,6 +63,16 @@ class SpeedPieChart extends Component {
             },
         width: 400
       },
+      plotOptions: {
+        pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+                enabled: true,
+                format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+            }
+        }
+    },
       title: {
         text: 'Speed Ranges'
       },
@@ -72,19 +83,9 @@ class SpeedPieChart extends Component {
         name: 'Car A',
         lineColor: 'gold',
         color: 'gold',
-        data: [{
-            name: '0 to 30 mph',
-            color: 'yellow',
-            y: 33.34,
-        }, {
-            name: '30 to 60 mph',
-            color: 'green',
-            y: 33.33
-        }, {
-            name: '> 60 mph',
-            color: 'red',
-            y: 33.33
-        }]
+        data: [{ name: '0 to 30 mph', color: 'yellow', y: 33.34},
+               { name: '30 to 60 mph', color: 'green', y: 33.34},
+               { name: '> 60 mph', color: 'red', y: 33.34}]
       }]
     }});
     this.setState({loading: false})

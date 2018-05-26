@@ -22,8 +22,7 @@ class TempGraph extends Component {
 
   addPoint = (pointinfo) => {
     let chart = this.tg.getChart();
-    console.log(pointinfo.time)
-    chart.series[0].addPoint([pointinfo.temp, pointinfo.speed], true, true)
+    chart.series[0].addPoint([pointinfo.time, pointinfo.temp], true, true)
     let categories = chart.xAxis[0].categories;
     categories.push(pointinfo.time);
     chart.xAxis[0].setCategories(categories, true);
@@ -46,7 +45,7 @@ class TempGraph extends Component {
         marginRight: 10,
       },
       title: {
-        text: 'Vehicle Engine Temperature'
+        text: 'Temperature Over Time'
       },
       subtitle: {
         text: 'Source: Parse Technologies'

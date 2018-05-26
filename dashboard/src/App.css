@@ -22,29 +22,27 @@
 }
 
 .app-head-text {
-  margin-top: 5px;
+  margin-top: 25px;
   margin-left: 10px;
   color: white;
   text-align: left;
-  font-size: 75px;
+  font-size: 36px;
   font-weight: 700;
 }
 
 .app-cont {
-  box-shadow: 0px 5px 15px -1px #aeb3ba;
   /* border-radius: 5px; */
   background-color: white;
   margin: auto;
-  margin-top: 70px;
+  margin-top: 140px;
   width: 1400px;
-  height: 1360px;
+  height: 1375px;
 
 }
 
 .rowA {
-  margin-top: 70px;
+  margin-top: 0px;
   display: flex;
-  box-shadow: 2px 5px 2px -2px white;
 
   /* flex-direction: row; */
   /* justify-content: center; */
@@ -66,10 +64,21 @@
 }
 
 .temp-text {
-  color: #aeb3ba;
+  width: 600px;
   text-align: left;
-  font-size: 20px;
+  font-size: 30px;
   font-weight: 200;
+}
+
+.temp-info-cont {
+  margin-top: 5px;
+  margin-bottom: 20px;
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 600px;
+  box-shadow: 2px 2px 10px -1px #aeb3ba;
 }
 
 .testbutton {
@@ -97,16 +106,18 @@
 }
 
 .volt-text {
-  color: #aeb3ba;
+  width: 600px;
   text-align: left;
-  font-size: 20px;
+  font-size: 30px;
   font-weight: 200;
 }
 
 .speed-cont-out {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   background-color: white;
-  border: 1px solid;
-  border-style: outset;
   padding: 10px;
   /* box-shadow: 5px 10px 8px #888888; */
 }
@@ -116,10 +127,10 @@
   padding-top: 10px;
   justify-content: center;
   background-color: white;
-  width: 100%;
-  height: 650px;
+  width: 80%;
+  height: 400px;
   box-sizing: border-box;
-  width: 100%;
+  width: 885px;
   /* padding: 5px; */
   /* border: 1px solid; */
   /* border-style: outset; */
@@ -131,22 +142,36 @@
   height: 100%;
   margin: 0px;
   padding: 20px;
-  background-color: white;
-  color: #aeb3ba;
-  /* text-align: left; */
-  font-size: 20px;
+  width: 1300px;
+  text-align: left;
+  font-size: 30px;
   font-weight: 200;
 }
 
 .speed-cont-in {
   display: flex;
   margin-top: -10px;
-  padding-left: 50px;
+  height: 450px;
 }
 
 .speed-pie {
   background-color: white;
-  width: 300px;
+  width: 400px;
+  height: 400px;
+  margin-top: 15px;
+  margin-left: 10px;
+}
+
+.speed-info-child-cont {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 1295px;
+  margin-bottom: 50px;
+  box-shadow: 2px 2px 10px -1px #aeb3ba;
+  margin-top: -30px;
+  margin-bottom: 20px;
+  height: 70px;
 }
 
 @keyframes App-logo-spin {

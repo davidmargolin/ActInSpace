@@ -14,6 +14,7 @@ class App extends Component {
   constructor(props){
     super(props);
     this.tempChild = React.createRef();
+    this.tempInfoChild = React.createRef();
     this.voltChild = React.createRef();
     this.voltInfoChild = React.createRef();
     this.speedChild = React.createRef();
@@ -43,6 +44,7 @@ class App extends Component {
     let timestamp = this.getTimestamp();
     var data = {temp: temp, time: timestamp}
     this.tempChild.current.addPoint(data);
+    this.tempInfoChild.current.addPoint(data.temp);
   }
 
   addVoltPoint = (volt) => {
@@ -96,39 +98,41 @@ class App extends Component {
       <div className="app-page">
         <div className="app-header">
           <div >
-            <img style={{height: 90}} src={require("./images/Logo.png")} />
-
-          </div>
-          <div >
             <p className="app-head-text">Analytics Dashboard</p>
-
           </div>
-
-
+          <div style={{display: 'flex', justifyContent: 'flex-end', width: '75%'}}>
+            <img style={{height: 90}} src={require("./images/Logo.png")} />
+          </div>
         </div>
         <div className="app-cont">
           <div className="rowA">
             <div className="temp-cont">
-              <p className="temp-text">Temperature</p>
+              <p className="temp-text">Vehicle Engine</p>
               <TempGraph ref={this.tempChild} data={testtempdata}/>
-              <TempInfo />
+              <div className="temp-info-cont">
+                <TempInfo ref={this.tempInfoChild}/>
+              </div>
             </div>
             <div className="volt-cont">
-              <p className="volt-text">Battery Voltage</p>
+              <p className="volt-text">Battery Usage</p>
               <VoltGraph ref={this.voltChild} data={testvoltdata}/>
-              <VoltInfo ref={this.voltInfoChild}/>
+              <div className="temp-info-cont">
+                <VoltInfo ref={this.voltInfoChild}/>
+              </div>
             </div>
           </div>
           <div className="speed-cont-out">
-            <p className="speed-text">Speed</p>
+            <p className="speed-text">Vehicle Movement</p>
             <div className="speed-cont-in">
               <div className="speed-cont">
                 <SpeedGraph ref={this.speedChild} data={testspeeddata}/>
-                <SpeedInfo ref={this.speedInfoChild}/>
               </div>
               <div className="speed-pie">
                 <SpeedPieChart ref={this.speedPieChild}/>
               </div>
+            </div>
+            <div className="speed-info-child-cont">
+              <SpeedInfo ref={this.speedInfoChild}/>
             </div>
           </div>
         </div>

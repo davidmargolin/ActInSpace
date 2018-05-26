@@ -44,7 +44,7 @@ class SpeedGraph extends Component {
         width: 885
       },
       title: {
-        text: 'Car Battery Voltage'
+        text: 'Velocity Over Time'
       },
       subtitle: {
         text: 'Source: Parse Technologies'
@@ -57,7 +57,7 @@ class SpeedGraph extends Component {
       },
       yAxis: {
         title: {
-          text: 'Speed (in V)'
+          text: 'Velocity (in mph)'
         }
       },
       series: [{

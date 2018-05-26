@@ -19,8 +19,7 @@ class VoltGraph extends Component {
 
   addPoint = (pointinfo) => {
     let chart = this.vg.getChart();
-    console.log(pointinfo.time)
-    chart.series[0].addPoint([pointinfo.volt, pointinfo.speed], true, true)
+    chart.series[0].addPoint([pointinfo.time, pointinfo.volt], true, true)
     let categories = chart.xAxis[0].categories;
     categories.push(pointinfo.time);
     chart.xAxis[0].setCategories(categories, true);
@@ -43,7 +42,7 @@ class VoltGraph extends Component {
         marginRight: 10,
       },
       title: {
-        text: 'Car Battery Voltage'
+        text: 'Voltage Over Time'
       },
       subtitle: {
         text: 'Source: Parse Technologies'
