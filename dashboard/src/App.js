@@ -93,6 +93,13 @@ class App extends Component {
     return Math.floor(Math.random() * Math.floor(max));
   }
 
+  resetDash = (e) => {
+    e.preventDefault();
+    let ref = firebase.database().ref('/packets');
+    ref.remove();
+    window.location.reload(false); 
+  }
+
   render() {
     return (
       <div className="app-page">
@@ -136,6 +143,7 @@ class App extends Component {
             </div>
           </div>
         </div>
+        <button className="reset" onClick={(event) => {this.resetDash(event)}}>Reset Dashboard</button>
       </div>
     );
   }
