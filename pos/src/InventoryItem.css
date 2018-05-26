@@ -1,0 +1,22 @@
+.tinyThing{
+  height: 250px;
+  width: 250px;
+  background: blue;
+  align-items: center;
+}
+.main{
+  background: red;
+}
+.styleimg{
+  height: 80;
+  display: flex;
+}
+.words{
+  align: center;
+}
+/*
+image
+name
+weight (input)
+submit button
+*/
