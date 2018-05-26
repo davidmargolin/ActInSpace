@@ -37,7 +37,7 @@
   margin: auto;
   margin-top: 70px;
   width: 1400px;
-  height: 1300px;
+  height: 1360px;
 
 }
 
@@ -98,6 +98,11 @@
   font-weight: 200;
 }
 
+.speed-cont-out {
+  background-color: #212c3d;
+  border: solid black 2px;
+}
+
 .speed-cont {
   margin-top: 5px;
   padding-top: 10px;
@@ -107,15 +112,29 @@
   height: 650px;
   box-sizing: border-box;
   width: 100%;
-  border: solid black 2px;
   padding: 5px;
 }
 
 .speed-text {
+  height: 100%;
+  margin: 0px;
+  padding: 20px;
+  background-color: #212c3d;
   color: #aeb3ba;
   /* text-align: left; */
   font-size: 20px;
   font-weight: 200;
+}
+
+.speed-cont-in {
+  display: flex;
+  margin-top: -10px;
+  padding-left: 50px;
+}
+
+.speed-pie {
+  background-color: #212c3d;
+  width: 300px;
 }
 
 @keyframes App-logo-spin {

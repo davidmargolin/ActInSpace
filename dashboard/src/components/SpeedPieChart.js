@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import ReactHighCharts from 'react-highcharts';
-import { HighCharts } from 'react-highcharts';
 import './TempGraph.css'
 
-class TempGraph extends Component {
+class SpeedPieChart extends Component {
 
   constructor(props){
     super(props);
@@ -12,6 +11,9 @@ class TempGraph extends Component {
       addedpoint: false,
       pointinfo: null,
       loading: true,
+      rangeA: 0,
+      rangeB: 0,
+      rangeC: 0,
     }
   }
 
@@ -22,16 +24,16 @@ class TempGraph extends Component {
 
   addPoint = (pointinfo) => {
     let chart = this.crg.getChart();
-    chart.series[0].addPoint([pointinfo.time, pointinfo.temp], true, true)
+    chart.series[0].addPoint([pointinfo.time, pointinfo.volt], true, true)
     this.setState({pointinfo, addedpoint: true})
   }
 
   createConfig = () => {
     console.log(this.props.data)
-    let temps = [];
+    let volts = [];
     let times = [];
     for(let i = 0; i < this.props.data.length; i++){
-      temps[i] = this.props.data[i].temp;
+      volts[i] = this.props.data[i].volt;
       times[i] = this.props.data[i].time;
     }
     this.setState({config: {
@@ -43,7 +45,7 @@ class TempGraph extends Component {
         marginRight: 10,
       },
       title: {
-        text: 'Vehicle Engine Temperature'
+        text: 'Car Battery Voltage'
       },
       subtitle: {
         text: 'Source: Parse Technologies'
@@ -56,14 +58,14 @@ class TempGraph extends Component {
       },
       yAxis: {
         title: {
-          text: 'Temperature (in Farenheit)'
+          text: 'Voltage (in V)'
         }
       },
       series: [{
         name: 'Car A',
-        lineColor: 'red',
-        color: 'red',
-        data: temps
+        lineColor: 'gold',
+        color: 'gold',
+        data: volts
       }]
     }});
     this.setState({loading: false})
@@ -82,4 +84,4 @@ class TempGraph extends Component {
   }
 }
 
-export default TempGraph
+export default SpeedPieChart

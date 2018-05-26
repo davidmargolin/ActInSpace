@@ -5,6 +5,8 @@ import VoltInfo from './components/VoltInfo'
 import VoltGraph from './components/VoltGraph'
 import SpeedGraph from './components/SpeedGraph'
 import SpeedInfo from './components/SpeedInfo'
+import SpeedPieChart from './components/SpeedPieChart'
+import * as firebase from 'firebase'
 import './App.css'
 
 class App extends Component {
@@ -13,7 +15,27 @@ class App extends Component {
     super(props);
     this.tempChild = React.createRef();
     this.voltChild = React.createRef();
+    this.voltInfoChild = React.createRef();
     this.speedChild = React.createRef();
+    this.speedInfoChild = React.createRef();
+  }
+
+  componentDidMount = () => {
+    var config = {
+      apiKey: "AIzaSyDsv583oj2DgoPL6Rqt-e-oB2t_VWCnPOw",
+      authDomain: "parsedrive-7874e.firebaseapp.com",
+      databaseURL: "https://parsedrive-7874e.firebaseio.com",
+      projectId: "parsedrive-7874e",
+      storageBucket: "",
+      messagingSenderId: "451356055475"
+    };
+    firebase.initializeApp(config);
+    let ref = firebase.database().ref('/packets');
+    ref.on("child_added", (snapshot) => {
+      var newPacket = snapshot.val();
+      console.log(newPacket)
+      this.parsePacket(newPacket)
+    });
   }
 
   addTempPoint = (temp) => {
@@ -26,12 +48,14 @@ class App extends Component {
     let timestamp = this.getTimestamp();
     var data = {volt: volt, time: timestamp}
     this.voltChild.current.addPoint(data);
+    this.voltInfoChild.current.addPoint(data.volt);
   }
 
   addSpeedPoint = (speed) => {
     let timestamp = this.getTimestamp();
     let data = {speed: speed, time: timestamp}
     this.speedChild.current.addPoint(data);
+    this.speedInfoChild.current.addPoint(data.speed);
   }
 
   getTimestamp = () => {
@@ -77,20 +101,24 @@ class App extends Component {
               <p className="temp-text">Temperature</p>
               <TempGraph ref={this.tempChild} data={testtempdata}/>
               <TempInfo />
-              <button className="testbutton" onClick={(event) => {this.addTempPoint(event)}}>Add Data</button>
             </div>
             <div className="volt-cont">
               <p className="volt-text">Battery Voltage</p>
               <VoltGraph ref={this.voltChild} data={testvoltdata}/>
-              <VoltInfo />
-              <button className="testbutton" onClick={(event) => {this.addVoltPoint(event)}}>Add Data</button>
+              <VoltInfo ref={this.voltInfoChild}/>
             </div>
           </div>
-          <div className="speed-cont">
+          <div className="speed-cont-out">
             <p className="speed-text">Speed</p>
-            <SpeedGraph ref={this.speedChild} data={testspeeddata}/>
-            <SpeedInfo />
-            <button className="testbutton" onClick={(event) => {this.addSpeedPoint(event)}}>Add Data</button>
+            <div className="speed-cont-in">
+              <div className="speed-cont">
+                <SpeedGraph ref={this.speedChild} data={testspeeddata}/>
+                <SpeedInfo ref={this.speedInfoChild}/>
+              </div>
+              <div className="speed-pie">
+                <p>would be speed pie chart</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -101,21 +129,21 @@ class App extends Component {
 export default App;
 
 const testtempdata = [
-  {time: '12:14PM', temp: 75}, {time: '12:14PM', temp: 77}, {time: '12:14PM', temp: 80},
-  {time: '12:14PM', temp: 81}, {time: '12:14PM', temp: 78}, {time: '12:14PM', temp: 79},
-  {time: '12:14PM', temp: 75}, {time: '12:14PM', temp: 71}, {time: '12:14PM', temp: 66}
+  {time: 'Start', temp: 0}, {time: 'Start', temp: 0}, {time: 'Start', temp: 0},
+  {time: 'Start', temp: 0}, {time: 'Start', temp: 0}, {time: 'Start', temp: 0},
+  {time: 'Start', temp: 0}, {time: 'Start', temp: 0}, {time: 'Start', temp: 0}
 ]
 
 const testvoltdata = [
-  {time: '12:14PM', volt: 175}, {time: '12:14PM', volt: 177}, {time: '12:14PM', volt: 280},
-  {time: '12:14PM', volt: 281}, {time: '12:14PM', volt: 178}, {time: '12:14PM', volt: 379},
-  {time: '12:14PM', volt: 175}, {time: '12:14PM', volt: 271}, {time: '12:14PM', volt: 266}
+  {time: 'Start', volt: 0}, {time: 'Start', volt: 0}, {time: 'Start', volt: 0},
+  {time: 'Start', volt: 0}, {time: 'Start', volt: 0}, {time: 'Start', volt: 0},
+  {time: 'Start', volt: 0}, {time: 'Start', volt: 0}, {time: 'Start', volt: 0}
 ]
 
 const testspeeddata = [
-  {time: '12:14PM', speed: 175}, {time: '12:14PM', speed: 177}, {time: '12:14PM', speed: 280},
-  {time: '12:14PM', speed: 281}, {time: '12:14PM', speed: 178}, {time: '12:14PM', speed: 379},
-  {time: '12:14PM', speed: 175}, {time: '12:14PM', speed: 271}, {time: '12:14PM', speed: 266}
+  {time: 'Start', speed: 0}, {time: 'Start', speed: 0}, {time: 'Start', speed: 0},
+  {time: 'Start', speed: 0}, {time: 'Start', speed: 0}, {time: 'Start', speed: 0},
+  {time: 'Start', speed: 0}, {time: 'Start', speed: 0}, {time: 'Start', speed: 0},
 ]
 
 const mask = 4286609885;
