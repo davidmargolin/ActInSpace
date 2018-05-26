@@ -107,7 +107,7 @@ class App extends Component {
           <div >
             <p className="app-head-text">Analytics Dashboard</p>
           </div>
-          <div style={{display: 'flex', justifyContent: 'flex-end', width: '75%'}}>
+          <div style={{display: 'flex',  margin: 7, justifyContent: 'flex-end', width: '75%'}}>
             <img style={{height: 90}} src={require("./images/Logo.png")} />
           </div>
         </div>
