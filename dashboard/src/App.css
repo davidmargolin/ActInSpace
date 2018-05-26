@@ -8,11 +8,11 @@
 }
 
 .app-header {
-  border-radius: 5px;
-  background-color: #212c3d;
+  border-radius: 0px;
+  background-color: black;
   position: absolute;
-  margin-top: -20px;
-  padding-left: 40px;
+  margin-top: 0px;
+  padding-left: 0px;
   width: 100%;
   height: 90px;
   box-sizing: border-box;
@@ -33,21 +33,19 @@
   border-radius: 5px;
   background-color: black;
   margin: auto;
-  margin-top: 200px;
+  margin-top: 100px;
   width: 1400px;
   height: 1000px;
 
-  box-sizing: border-box;
-  width: 100%;
-  border: solid black 2px;
-  padding: 5px;
 }
 
 .rowA {
   display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
+  box-shadow: 0px 5px 2px -2px #aeb3ba;
+
+  /* flex-direction: row; */
+  /* justify-content: center; */
+  /* align-items: center; */
 }
 
 .invent-cont {
@@ -91,7 +89,7 @@
 }
 
 .cust-cont {
-  margin-top: -10px;
+  margin-top: 5px;
   padding-top: 10px;
   justify-content: center;
   background-color: #212c3d;
