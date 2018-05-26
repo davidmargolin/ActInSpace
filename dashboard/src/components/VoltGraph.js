@@ -8,8 +8,6 @@ class VoltGraph extends Component {
     super(props);
     this.state={
       config: null,
-      addedpoint: false,
-      pointinfo: null,
       loading: true,
     }
   }
@@ -20,9 +18,12 @@ class VoltGraph extends Component {
   }
 
   addPoint = (pointinfo) => {
-    let chart = this.crg.getChart();
-    chart.series[0].addPoint([pointinfo.time, pointinfo.volt], true, true)
-    this.setState({pointinfo, addedpoint: true})
+    let chart = this.vg.getChart();
+    console.log(pointinfo.time)
+    chart.series[0].addPoint([pointinfo.volt, pointinfo.speed], true, true)
+    let categories = chart.xAxis[0].categories;
+    categories.push(pointinfo.time);
+    chart.xAxis[0].setCategories(categories, true);
   }
 
   createConfig = () => {
@@ -37,7 +38,7 @@ class VoltGraph extends Component {
       chart: {
         type: 'spline',
         animation: {
-                duration: 500
+                duration: 0
             },
         marginRight: 10,
       },
@@ -73,7 +74,7 @@ class VoltGraph extends Component {
       <div>
         <div className="graph-cont">
           {this.state.loading ? null :
-            <ReactHighCharts className="actual-graph" neverReflow={true} config={this.state.config} ref={a => this.crg = a}></ReactHighCharts>
+            <ReactHighCharts className="actual-graph" neverReflow={true} config={this.state.config} ref={a => this.vg = a}></ReactHighCharts>
           }
         </div>
       </div>

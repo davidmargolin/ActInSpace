@@ -21,7 +21,7 @@ class VoltInfo extends Component {
     let min = this.state.min;
     let max = this.state.max;
     average = (((i-1) * average) + data) / i
-    let ceilaverage = Math.ceil(average);
+    let ceilaverage = average.toFixed(2);
     this.setState({average, ceilaverage})
     if(i - 1 !== 0){
       if(data < min && data !== 0)
@@ -38,7 +38,7 @@ class VoltInfo extends Component {
     return (
       <div className="tempinfo-cont">
         <p className="tempinfo-bold">Avg: </p>
-        <p className="tempinfo-light">{this.state.average} V</p>
+        <p className="tempinfo-light">{this.state.ceilaverage} V</p>
         <p className="tempinfo-bold">Max: </p>
         <p className="tempinfo-light">{this.state.max} V</p>
       </div>

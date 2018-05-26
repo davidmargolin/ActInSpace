@@ -134,7 +134,8 @@
 
 .speed-pie {
   background-color: #212c3d;
-  width: 300px;
+  margin-top: 10px;
+  padding-right: 50px;
 }
 
 @keyframes App-logo-spin {

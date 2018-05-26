@@ -37,7 +37,7 @@ class SpeedInfo extends Component {
 
   render = () => {
     return (
-      <div className="tempinfo-cont">
+      <div className="tempinfo-cont speedinfo-cont">
         <p className="tempinfo-bold">Average: </p>
         <p className="tempinfo-light">{this.state.ceilaverage} mph</p>
         <p className="tempinfo-bold">Max: </p>

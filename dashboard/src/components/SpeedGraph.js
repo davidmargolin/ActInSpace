@@ -18,7 +18,7 @@ class SpeedGraph extends Component {
   }
 
   addPoint = (pointinfo) => {
-    let chart = this.crg.getChart();
+    let chart = this.sg.getChart();
     console.log(pointinfo.time)
     chart.series[0].addPoint([pointinfo.time, pointinfo.speed], true, true)
     let categories = chart.xAxis[0].categories;
@@ -41,6 +41,7 @@ class SpeedGraph extends Component {
                 duration: 0
             },
         marginRight: 10,
+        width: 885
       },
       title: {
         text: 'Car Battery Voltage'
@@ -74,7 +75,7 @@ class SpeedGraph extends Component {
       <div>
         <div className="graph-cont">
           {this.state.loading ? null :
-            <ReactHighCharts className="actual-graph" neverReflow={true} config={this.state.config} ref={a => this.crg = a}></ReactHighCharts>
+            <ReactHighCharts className="actual-graph" neverReflow={true} config={this.state.config} ref={a => this.sg = a}></ReactHighCharts>
           }
         </div>
       </div>
