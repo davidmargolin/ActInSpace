@@ -93,7 +93,16 @@ class App extends Component {
     return (
       <div className="app-page">
         <div className="app-header">
-          <p className="app-head-text">Analytics Dashboard</p>
+          <div >
+            <img style={{height: 90}} src={require("./images/Logo.png")} />
+
+          </div>
+          <div >
+            <p className="app-head-text">Analytics Dashboard</p>
+
+          </div>
+
+
         </div>
         <div className="app-cont">
           <div className="rowA">
