@@ -21,9 +21,12 @@ class TempGraph extends Component {
   }
 
   addPoint = (pointinfo) => {
-    let chart = this.crg.getChart();
-    chart.series[0].addPoint([pointinfo.time, pointinfo.temp], true, true)
-    this.setState({pointinfo, addedpoint: true})
+    let chart = this.tg.getChart();
+    console.log(pointinfo.time)
+    chart.series[0].addPoint([pointinfo.temp, pointinfo.speed], true, true)
+    let categories = chart.xAxis[0].categories;
+    categories.push(pointinfo.time);
+    chart.xAxis[0].setCategories(categories, true);
   }
 
   createConfig = () => {
@@ -38,7 +41,7 @@ class TempGraph extends Component {
       chart: {
         type: 'spline',
         animation: {
-                duration: 500
+                duration: 0
             },
         marginRight: 10,
       },
@@ -74,7 +77,7 @@ class TempGraph extends Component {
       <div>
         <div className="graph-cont">
           {this.state.loading ? null :
-            <ReactHighCharts className="actual-graph" neverReflow={true} config={this.state.config} ref={a => this.crg = a}></ReactHighCharts>
+            <ReactHighCharts className="actual-graph" neverReflow={true} config={this.state.config} ref={a => this.tg = a}></ReactHighCharts>
           }
         </div>
       </div>

@@ -22,50 +22,69 @@ class SpeedPieChart extends Component {
     this.createConfig();
   }
 
-  addPoint = (pointinfo) => {
-    let chart = this.crg.getChart();
-    chart.series[0].addPoint([pointinfo.time, pointinfo.volt], true, true)
-    this.setState({pointinfo, addedpoint: true})
+  addPoint = (data) => {
+    if(data <= 30){
+      let temp = this.state.rangeA;
+      this.setState({rangeA: temp + 1})
+    }
+    else if(data > 30 && data <= 60){
+      let temp = this.state.rangeB;
+      this.setState({rangeB: temp + 1})
+    }
+    if(data > 60){
+      let temp = this.state.rangeC;
+      this.setState({rangeA: temp + 1})
+    }
+    this.rangify();
+  }
+
+  rangify = () => {
+    let a = this.state.rangeA;
+    let b = this.state.rangeB;
+    let c = this.state.rangeC;
+    let total = a + b + c;
+    let dataA = (a / total).toFixed(2);
+    let dataB = (b / total).toFixed(2);
+    let dataC = 100 - dataA - dataB;
+    let chart = this.spc.getChart();
+    chart.series[0].setData({y: dataA}, {y: dataB}, {y: dataC});
   }
 
   createConfig = () => {
-    console.log(this.props.data)
-    let volts = [];
-    let times = [];
-    for(let i = 0; i < this.props.data.length; i++){
-      volts[i] = this.props.data[i].volt;
-      times[i] = this.props.data[i].time;
-    }
     this.setState({config: {
       chart: {
-        type: 'spline',
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        type: 'pie',
         animation: {
-                duration: 500
+                duration: 0
             },
-        marginRight: 10,
+        width: 400
       },
       title: {
-        text: 'Car Battery Voltage'
+        text: 'Speed Ranges'
       },
       subtitle: {
         text: 'Source: Parse Technologies'
-      },
-      xAxis: {
-        title: {
-          text: 'Time'
-        },
-        categories: times
-      },
-      yAxis: {
-        title: {
-          text: 'Voltage (in V)'
-        }
       },
       series: [{
         name: 'Car A',
         lineColor: 'gold',
         color: 'gold',
-        data: volts
+        data: [{
+            name: '0 to 30 mph',
+            color: 'yellow',
+            y: 33.34,
+        }, {
+            name: '30 to 60 mph',
+            color: 'green',
+            y: 33.33
+        }, {
+            name: '> 60 mph',
+            color: 'red',
+            y: 33.33
+        }]
       }]
     }});
     this.setState({loading: false})
@@ -76,7 +95,7 @@ class SpeedPieChart extends Component {
       <div>
         <div className="graph-cont">
           {this.state.loading ? null :
-            <ReactHighCharts className="actual-graph" neverReflow={true} config={this.state.config} ref={a => this.crg = a}></ReactHighCharts>
+            <ReactHighCharts className="actual-graph" neverReflow={true} config={this.state.config} ref={a => this.spc = a}></ReactHighCharts>
           }
         </div>
       </div>

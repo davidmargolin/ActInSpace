@@ -18,6 +18,7 @@ class App extends Component {
     this.voltInfoChild = React.createRef();
     this.speedChild = React.createRef();
     this.speedInfoChild = React.createRef();
+    this.speedPieChild = React.createRef();
   }
 
   componentDidMount = () => {
@@ -56,6 +57,7 @@ class App extends Component {
     let data = {speed: speed, time: timestamp}
     this.speedChild.current.addPoint(data);
     this.speedInfoChild.current.addPoint(data.speed);
+    this.speedPieChild.current.addPoint(data.speed);
   }
 
   getTimestamp = () => {
@@ -125,7 +127,7 @@ class App extends Component {
                 <SpeedInfo ref={this.speedInfoChild}/>
               </div>
               <div className="speed-pie">
-                <p>would be speed pie chart</p>
+                <SpeedPieChart ref={this.speedPieChild}/>
               </div>
             </div>
           </div>
